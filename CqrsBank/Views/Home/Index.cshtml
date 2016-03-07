@@ -1,0 +1,21 @@
+﻿@using CqrsBank.Query.Queries
+@model CqrsBank.Query.Results.AccountIndex
+@{
+  ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+  <div class="col-md-3">
+    <h2>Accounts</h2>
+    <div class="list-group">
+      @foreach (var account in Model.Accounts)
+      {
+        <a href="@Url.Action("Details", new GetAccountDetails(account.Id))" class="list-group-item">@account.Name</a>
+      }
+    </div>
+    <a href="@Url.Action("Add")" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      Add Account
+    </a>
+  </div>
+</div>

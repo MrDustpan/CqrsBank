@@ -1,0 +1,51 @@
+﻿@using CqrsBank.Query.Queries
+@model CqrsBank.Query.Results.AccountDetails
+
+@{
+  ViewBag.Title = "Account Details";
+}
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>@Model.Name - @Model.Balance.ToString("C")</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    <a href="@Url.Action("Add", "Transactions", new GetNewTransaction(@Model.Id))" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+      Add Transaction
+    </a>
+  </div>
+  <div class="col-md-2">
+    @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+    {
+      <input type="hidden" name="Id" value="@Model.Id" />
+      <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        Delete Account
+      </button>
+    }
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var transaction in Model.Transactions)
+        {
+        <tr>
+          <td>@transaction.Description</td>
+          <td>@transaction.Amount.ToString("C")</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

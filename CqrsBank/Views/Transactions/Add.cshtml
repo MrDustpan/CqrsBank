@@ -1,0 +1,24 @@
+﻿@using CqrsBank.Query.Queries
+@model CqrsBank.Query.Results.NewTransaction
+
+@{
+  ViewBag.Title = "Add Transaction";
+}
+
+<h2>@Model.AccountName - Add Transaction</h2>
+@using (Html.BeginForm())
+{
+  <div class="form-group">
+    <label for="Description">Description</label>
+    <input type="text" class="form-control" id="Description" name="Description">
+  </div>
+  <div class="form-group">
+    <label for="Amount">Amount</label>
+    <input type="text" class="form-control" id="Amount" name="Amount">
+  </div>
+  <button type="submit" class="btn btn-primary">
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+    Add Transaction
+  </button>
+  <a href="@Url.Action("Details", "Home", new GetAccountDetails(@Model.AccountId))" class="btn btn-default">Cancel</a>
+}
